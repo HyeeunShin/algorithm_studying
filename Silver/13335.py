@@ -1,25 +1,17 @@
 n, w, L = map(int, input().split())
 truck = list(map(int, input().split()))
 
-sum = 0
-passBull = False
-for i in range(n):
-    print("i: ", i)
+temp = [0] * w #다리의 칸 
+time = 0
 
-    if passBull: 
-        passBull = False
-        pass
+while temp:
+    time += 1
+    temp.pop(0) 
 
-    if (i+1) < n:
-        if(truck[i] + truck[i+1] <= L):
-            sum += (w*2 - 1)
-            passBull = True
+    if truck:
+        if sum(temp) + truck[0] <= L: #트럭+다리위트럭 <= L
+            temp.append(truck.pop(0)) #다리위에 트럭이 또 들어와
         else:
-            sum += w
-    else:
-        sum += w + 1
-        
-    print("sum: ", sum)
+            temp.append(0) 
 
-
-print(sum)
+print(time)
